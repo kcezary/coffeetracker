@@ -165,6 +165,8 @@
     <Content Include="src\journal.html" />
     <Content Include="src\journal.js" />
     <Content Include="src\main.js" />
+    <Content Include="src\resources\date-format.js" />
+    <Content Include="src\resources\price-format.js" />
     <Content Include="styles\splash.css" />
     <Content Include="styles\styles.css" />
     <Content Include="wallaby.js" />

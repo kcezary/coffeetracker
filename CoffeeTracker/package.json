@@ -72,6 +72,7 @@
       "font-awesome": "npm:font-awesome@^4.5.0",
       "jquery": "npm:jquery@^2.2.2",
       "moment": "npm:moment@^2.12.0",
+      "openexchangerates/accounting.js": "github:openexchangerates/accounting.js@^0.4.1",
       "text": "github:systemjs/plugin-text@^0.0.3"
     },
     "devDependencies": {

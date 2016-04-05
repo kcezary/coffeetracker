@@ -18,8 +18,8 @@ export class Welcome {
     }
 
     activate(params) {
-        //return this.http.fetch('api/data/entries')
-        //  .then(response => response.json())
-        //  .then(entries => this.entries = entries);   
+        return this.http.fetch('api/coffee')
+          .then(response => response.json())
+          .then(entries => this.entries = entries);   
     }
 }

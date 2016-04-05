@@ -1,3 +1,35 @@
 <template>
-    <div>test</div>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Kaffee Tracker</h1>
+        </div>
+
+        <require from="./resources/date-format"></require>
+        <require from="./resources/price-format"></require>
+
+        <table class="table table-hover table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Typ</th>
+                    <th>Anzahl</th>
+                    <th>Preis</th>
+                    <th>Gesamtpreis</th>
+                    <th>Ort</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr repeat.for="entry of entries">
+                    <td>${entry.date | dateFormat}</td>
+                    <td>${entry.coffeeType}</td>
+                    <td>${entry.quantity}</td>
+                    <td>${entry.itemPrice | priceFormat}</td>
+                    <td>${(entry.quantity * entry.itemPrice)  | priceFormat}</td>
+                    <td>${entry.location}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
 </template>
