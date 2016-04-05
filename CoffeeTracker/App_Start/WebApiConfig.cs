@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System.Web.Http;
 
 namespace CoffeeTracker
@@ -19,6 +19,13 @@ namespace CoffeeTracker
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var serializerSettings = config.Formatters.JsonFormatter.SerializerSettings;
+
+            serializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+            serializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            serializerSettings.Converters.Add(new StringEnumConverter());
         }
     }
 }
