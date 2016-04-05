@@ -1,6 +1,6 @@
 # coffeetracker
 
-Demo App bult with Aurelia
+Demo App built with Aurelia
 
 1. Ensure that [NodeJS](http://nodejs.org/), [Gulp](http://gulpjs.com/) and [jspm](http://jspm.io/) are installed globally.
 
