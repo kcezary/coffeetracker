@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CoffeeTracker.Model;
+using System;
 
 namespace CoffeeTracker.Controllers
 {
@@ -15,7 +16,7 @@ namespace CoffeeTracker.Controllers
 
         public IQueryable<CoffeeEntry> GetCoffeeEntries()
         {
-            return db.CoffeeEntries;
+            return db.CoffeeEntries.OrderByDescending(x => x.Date);
         }
 
         [ResponseType(typeof(CoffeeEntry))]
@@ -67,6 +68,8 @@ namespace CoffeeTracker.Controllers
         [ResponseType(typeof(CoffeeEntry))]
         public async Task<IHttpActionResult> PostCoffeeEntry(CoffeeEntry coffeeEntry)
         {
+            coffeeEntry.Date = DateTime.Now;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

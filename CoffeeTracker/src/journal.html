@@ -39,11 +39,10 @@
             font-size: 24px;
         }
 
-       .delete:hover {
-            cursor: pointer;
-            color: firebrick
-        }
-
+            .delete:hover {
+                cursor: pointer;
+                color: firebrick;
+            }
     </style>
 
     <div class="container">
@@ -54,6 +53,29 @@
         <require from="./resources/date-format"></require>
         <require from="./resources/price-format"></require>
 
+        <div class="row">
+            <div class="col-xs-6">
+                <form>
+                    <div class="form-group">
+                        <label for="coffeeType">Kaffeetyp</label>
+                        <input type="text" class="form-control" id="coffeeType" value.bind="newEntry.coffeeType"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Ort</label>
+                        <input type="text" class="form-control" id="location" value.bind="newEntry.location"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Preis</label>
+                        <input type="text" class="form-control" id="price" value.bind="newEntry.itemPrice"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Anzahl</label>
+                        <input type="text" class="form-control" id="quantity" value.bind="newEntry.quantity"/>
+                    </div>
+                    <button class="btn btn-default" click.delegate="save(newEntry)">Speichern</button>
+                </form>
+            </div>
+        </div>
 
         <div class="virtual-list">
             <div class="table-striped">

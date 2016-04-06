@@ -4,10 +4,19 @@ import $ from 'jquery';
 import {Bloodhound} from "typeahead.js-jspm";
 import 'fetch';
 
+class CoffeeEntry {
+    location = "";
+    coffeeType = "";
+    itemPrice = null;
+    quantity = 1;
+}
+
+
 @inject(HttpClient)
-export class Welcome {
+export class Journal {
 
     entries = [];
+    newEntry = new CoffeeEntry();
 
     constructor(http) {
         http.configure(config => {
@@ -24,8 +33,29 @@ export class Welcome {
         });
     }
 
+    save(newEntry){
+
+        this.newEntry = new CoffeeEntry();
+
+        var url = "api/coffee";
+        let data = JSON.stringify(newEntry);
+        return this.http.fetch(url, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(result => result.json())
+          .then(result => {
+            this.entries.unshift(result);
+        }).catch(error => {
+            //BAM add some logging
+        });
+    }
+
     deleteEntry(entry, index) {
-        var url = "api/coffee/" + entry.id;
+        let url = `api/coffee/${entry.id}`;
         return this.http.fetch(url, {
             method: 'delete'
         }).then(() => {
