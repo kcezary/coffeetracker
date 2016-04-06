@@ -1,4 +1,51 @@
 <template>
+    <style>
+        .virtual-list {
+            padding-top: 10px;
+            height: 800px;
+            display: block;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            /* for momentum scroll on iOS */
+        }
+
+            .virtual-list > .table-striped > div:nth-child(odd) {
+                background-color: #f9f9f9;
+            }
+
+            .virtual-list > .table-striped > div:nth-child(even) {
+                background-color: #fff;
+            }
+
+            .virtual-list > .table-striped > div:hover {
+                background-color: #f5f5f5;
+            }
+
+        .tile-outer {
+            padding-left: 7px;
+            padding-top: 5px;
+            padding-bottom: 12px;
+            border-bottom: 1px #ccc solid;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .delete {
+            font-size: 24px;
+        }
+
+       .delete:hover {
+            cursor: pointer;
+            color: firebrick
+        }
+
+    </style>
+
     <div class="container">
         <div class="jumbotron">
             <h1>Kaffee Tracker</h1>
@@ -7,29 +54,41 @@
         <require from="./resources/date-format"></require>
         <require from="./resources/price-format"></require>
 
-        <table class="table table-hover table-condensed table-striped">
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Typ</th>
-                    <th>Anzahl</th>
-                    <th>Preis</th>
-                    <th>Gesamtpreis</th>
-                    <th>Ort</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr repeat.for="entry of entries">
-                    <td>${entry.date | dateFormat}</td>
-                    <td>${entry.coffeeType}</td>
-                    <td>${entry.quantity}</td>
-                    <td>${entry.itemPrice | priceFormat}</td>
-                    <td>${(entry.quantity * entry.itemPrice)  | priceFormat}</td>
-                    <td>${entry.location}</td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="virtual-list">
+            <div class="table-striped">
+                <div virtual-repeat.for="entry of entries">
+                    <div class="tile-outer">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <em>${entry.date | dateFormat}</em> in  ${entry.location}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-11">
+                                <div class="title">${entry.coffeeType}</div>
+                            </div>
+                            <div class="col-xs-1">
+                                <i class="fa fa-trash-o delete" click.delegate="$parent.deleteEntry(entry, $index)"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <dl class="dl-horizontal">
+                                    <dt>Preis: </dt>
+                                    <dd>${entry.itemPrice | priceFormat} </dd>
+
+                                    <dt>Anzahl: </dt>
+                                    <dd>${entry.quantity}  </dd>
+
+                                    <dt>Gesamtpreis: </dt>
+                                    <dd>${(entry.quantity * entry.itemPrice)  | priceFormat}  </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </template>

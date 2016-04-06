@@ -14,7 +14,7 @@ namespace CoffeeTracker.Model
         [Min(1)]
         public int Quantity { get; set; }
 
-        [MaxLength(32)]
+        [MaxLength(56)]
         [Required]
         public string CoffeeType { get; set; }
 

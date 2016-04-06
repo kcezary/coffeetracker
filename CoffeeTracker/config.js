@@ -1,19 +1,18 @@
 System.config({
-  defaultJSExtensions: true,
-  transpiler: "babel",
-  babelOptions: {
+  "defaultJSExtensions": true,
+  "transpiler": "babel",
+  "babelOptions": {
     "optional": [
       "es7.decorators",
       "es7.classProperties"
     ]
   },
-  paths: {
+  "paths": {
     "*": "dist/*",
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
-
-  map: {
+  "map": {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.2.0",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.2.0",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-beta.1.2.0",
@@ -33,10 +32,11 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.20",
     "fetch": "github:github/fetch@0.10.1",
     "font-awesome": "npm:font-awesome@4.5.0",
-    "jquery": "npm:jquery@2.2.2",
+    "jquery": "npm:jquery@2.2.3",
     "moment": "npm:moment@2.12.0",
     "openexchangerates/accounting.js": "github:openexchangerates/accounting.js@0.4.1",
     "text": "github:systemjs/plugin-text@0.0.3",
+    "typeahead.js-jspm": "npm:typeahead.js-jspm@1.2.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -210,9 +210,13 @@ System.config({
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
+    "npm:typeahead.js-jspm@1.2.0": {
+      "jquery": "npm:jquery@2.2.3",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }
-});
+})
