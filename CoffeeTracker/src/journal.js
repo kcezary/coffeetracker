@@ -5,6 +5,7 @@ import {Bloodhound} from "typeahead.js-jspm";
 import 'fetch';
 import {CoffeeEntry} from './coffeeentry';
 import {Validation} from 'aurelia-validation';
+import * as toastr from "toastr";
 
 @inject(HttpClient, Validation)
 export class Journal {
@@ -83,17 +84,24 @@ export class Journal {
                     body: data
                 }).then(result => result.json())
                   .then(result => {
-
-                      this.newEntry.location = "";
-                      this.newEntry.coffeeType = "";
-                      this.newEntry.itemPrice = null;
-                      this.newEntry.quantity = null;
-
-                      this.validation.clear()
-
                       this.entries.unshift(result);
-                  }).catch(error => {
-                      //BAM add some logging
+                      
+                      let msg = `${result.coffeeType} erfolgreich gespeichert!`;
+                      toastr.success(msg);
+
+                  })
+                    .then(() => {
+                        //reset form
+                        this.newEntry.location = "";
+                        this.newEntry.coffeeType = "";
+                        this.newEntry.itemPrice = null;
+                        this.newEntry.quantity = null;
+
+                        this.validation.clear()
+                    })
+                    .catch(error => {
+                        let msg = `Es gab ein Problem hier...`;
+                        toastr.error(msg);
                   });
             });
     }
@@ -105,8 +113,12 @@ export class Journal {
         }).then(() => {
             //remove from UI
             this.entries.splice(index, 1);
+
+            let msg = `${entry.coffeeType} gelöscht!`;
+            toastr.info(msg);
         }).catch(error => {
-            //BAM add some logging
+            let msg = `Es gab ein Problem hier...`;
+            toastr.error(msg);
         });
     }
 

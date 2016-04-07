@@ -78,6 +78,7 @@
       "moment": "npm:moment@^2.12.0",
       "openexchangerates/accounting.js": "github:openexchangerates/accounting.js@^0.4.1",
       "text": "github:systemjs/plugin-text@^0.0.3",
+      "toastr": "github:CodeSeven/toastr@^2.1.2",
       "typeahead.js-jspm": "npm:typeahead.js-jspm@^1.2.0"
     },
     "devDependencies": {
