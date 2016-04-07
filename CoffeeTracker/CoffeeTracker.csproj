@@ -203,6 +203,9 @@
   <ItemGroup>
     <Content Include="jsconfig.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="locales\de\translation.json" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

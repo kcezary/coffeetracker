@@ -1,0 +1,9 @@
+﻿{
+  "title": "Kaffee Tracker",
+  "coffeeType": "Kaffeetyp",
+  "location": "Ort",
+  "price": "Preis",
+  "quantity": "Anzahl",
+  "save": "Speichern",
+  "sum": "Gesamtpreis"
+}

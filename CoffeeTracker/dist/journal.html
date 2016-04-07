@@ -69,7 +69,7 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h1>Kaffee Tracker</h1>
+            <h1 t="title"></h1>
         </div>
 
         <require from="./resources/date-format"></require>
@@ -82,23 +82,23 @@
                         <i class="fa fa-exclamation-triangle"></i> Die Eingaben sind nicht korrekt!
                     </div>-->
                     <div class="form-group">
-                        <label for="coffeeType">Kaffeetyp</label>
+                        <label for="coffeeType" t="coffeeType"></label>
                         <div class="clear"></div>
                         <input type="text" class="form-control twitter-typeahead" id="coffeeType" value.bind="newEntry.coffeeType" autocomplete="off" />
                     </div>
                     <div class="form-group">
-                        <label for="location">Ort</label>
+                        <label for="location" t="location"></label>
                         <input type="text" class="form-control" id="location" value.bind="newEntry.location"/>
                     </div>
                     <div class="form-group">
-                        <label for="price">Preis</label>
+                        <label for="price" t="price"></label>
                         <input type="text" class="form-control" id="price" value.bind="newEntry.itemPrice | numberFormat:2  & updateTrigger:'blur'" autocomplete="off"/>
                     </div>
                     <div class="form-group">
-                        <label for="quantity">Anzahl</label>
+                        <label for="quantity" t="quantity"></label>
                         <input type="text" class="form-control" id="quantity" value.bind="newEntry.quantity | numberFormat:0" autocomplete="off"/>
                     </div>
-                    <button class="btn btn-default" type="submit" disabled.bind="!validation.result.isValid">Speichern</button>
+                    <button class="btn btn-default" type="submit" disabled.bind="!validation.result.isValid" t="save"></button>
                 </form>
             </div>
         </div>
@@ -123,13 +123,13 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <dl class="dl-horizontal">
-                                    <dt>Preis: </dt>
+                                    <dt><span t="price"></span>: </dt>
                                     <dd>${entry.itemPrice | numberFormat:0} </dd>
 
-                                    <dt>Anzahl: </dt>
+                                    <dt><span t="quantity"></span>: </dt>
                                     <dd>${entry.quantity}  </dd>
 
-                                    <dt>Gesamtpreis: </dt>
+                                    <dt><span t="sum"></span>: </dt>
                                     <dd>${(entry.quantity * entry.itemPrice)  | numberFormat:2}  </dd>
                                 </dl>
                             </div>

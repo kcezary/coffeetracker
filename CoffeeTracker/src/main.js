@@ -1,12 +1,29 @@
 import 'bootstrap';
 import 'font-awesome/css/font-awesome.min.css!';
+import {I18N} from 'aurelia-i18n';
+import XHR from 'i18next-xhr-backend';
 
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
     .plugin('aurelia-ui-virtualization')
-    .plugin('aurelia-validation'); 
+    .plugin('aurelia-validation')
+    .plugin('aurelia-i18n', (instance) => {
+        // register backend plugin
+        instance.i18next.use(XHR);
+
+        // adapt options to your needs (see http://i18next.com/docs/options/)
+        instance.setup({
+            backend: {                                  // <-- configure backend settings
+                loadPath: '/locales/{{lng}}/{{ns}}.json', // <-- XHR settings for where to get the files from
+            },
+            lng : 'de',
+            attributes : ['t','i18n'],
+            fallbackLng : 'de',
+            debug : false
+        });
+    }); 
 
   //Uncomment the line below to enable animation.
   //aurelia.use.plugin('aurelia-animator-css');

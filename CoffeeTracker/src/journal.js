@@ -28,12 +28,12 @@ export class Journal {
                 .hasLengthBetween(1, 56)
             .ensure('quantity')
                 .isNotEmpty()
-                .isNumber()
+                //.isNumber()
                 .isGreaterThan(0)
                 .containsOnlyDigits()
             .ensure('itemPrice')
                 .isNotEmpty()
-                .isNumber()
+                //.isNumber()
                 .isGreaterThan(0);
     }
 
