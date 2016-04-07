@@ -55,11 +55,17 @@ export class Journal {
         };
 
         let $typeahead = $("#coffeeType");
+        let triggerChange = () => {
+            let val = $typeahead.val();
+            this.newEntry.coffeeType = val;
+        };
         $typeahead.typeahead({
             hint: true,
             highlight: true,
             minLength: 1
-        }, typeaheadOpts);
+        }, typeaheadOpts)
+            .on("typeahead:selected", triggerChange)
+            .on("typeahead:autocompleted", triggerChange);
     }
 
     save(newEntry){
