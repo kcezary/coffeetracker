@@ -1,6 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import 'fetch';
+import jsnlog from 'jsnlog';
 
 @inject(HttpClient)
 export class App {
@@ -24,6 +25,9 @@ export class App {
               nav: true, 
               title: '' }
         ]);
+
+        var logger = jsnlog.JL();
+        logger.info("configureRouter");
 
         this.router = router;
     }

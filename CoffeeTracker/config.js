@@ -38,6 +38,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.5.0",
     "i18next-xhr-backend": "npm:i18next-xhr-backend@0.5.3",
     "jquery": "npm:jquery@2.2.3",
+    "jsnlog": "npm:jsnlog@2.17.1",
     "moment": "npm:moment@2.12.0",
     "openexchangerates/accounting.js": "github:openexchangerates/accounting.js@0.4.1",
     "text": "github:systemjs/plugin-text@0.0.3",
@@ -253,6 +254,9 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:intl@1.1.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:jsnlog@2.17.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:moment@2.12.0": {

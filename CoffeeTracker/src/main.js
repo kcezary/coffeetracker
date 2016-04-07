@@ -2,6 +2,7 @@ import 'bootstrap';
 import 'font-awesome/css/font-awesome.min.css!';
 import {I18N} from 'aurelia-i18n';
 import XHR from 'i18next-xhr-backend';
+import jsnlog from 'jsnlog';
 
 export function configure(aurelia) {
   aurelia.use
@@ -24,6 +25,18 @@ export function configure(aurelia) {
             debug : false
         });
     }); 
+
+  window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
+      JL("ClientGlobalLogger").fatalException({
+          "msg": "Unhandled exception occured",
+          "errorMsg": errorMsg,
+          "url": url,
+          "line number": lineNumber,
+          "column": column
+      }, errorObj);
+
+      return false;
+  }
 
   //Uncomment the line below to enable animation.
   //aurelia.use.plugin('aurelia-animator-css');
