@@ -18,20 +18,20 @@ export class Journal {
         });
 
         this.http = http;
-        this.newEntry = new CoffeeEntry();
-        this.validation = validation.on(this.newEntry, (config) => { config.useLocale('de-DE')})
-          .ensure('location')
+        this.newEntry = new CoffeeEntry(validation);
+        this.validation = validation.on(this, (config) => { config.useLocale('de-DE')})
+          .ensure('newEntry.location')
                 .isNotEmpty()
                 .hasLengthBetween(1, 32)
-            .ensure('coffeeType')
+            .ensure('newEntry.coffeeType')
                 .isNotEmpty()
                 .hasLengthBetween(1, 56)
-            .ensure('quantity')
+            .ensure('newEntry.quantity')
                 .isNotEmpty()
                 //.isNumber()
                 .isGreaterThan(0)
                 .containsOnlyDigits()
-            .ensure('itemPrice')
+            .ensure('newEntry.itemPrice')
                 .isNotEmpty()
                 //.isNumber()
                 .isGreaterThan(0);
@@ -73,12 +73,6 @@ export class Journal {
         this.validation.validate()
             .then(() => {
                 let data = JSON.stringify(newEntry);
-                
-                this.newEntry.location = "";
-                this.newEntry.coffeeType = "";
-                this.newEntry.itemPrice = null;
-                this.newEntry.quantity = null;
-
                 var url = "api/coffee";
                 return this.http.fetch(url, {
                     method: 'post',
@@ -89,6 +83,14 @@ export class Journal {
                     body: data
                 }).then(result => result.json())
                   .then(result => {
+
+                      this.newEntry.location = "";
+                      this.newEntry.coffeeType = "";
+                      this.newEntry.itemPrice = null;
+                      this.newEntry.quantity = null;
+
+                      this.validation.clear()
+
                       this.entries.unshift(result);
                   }).catch(error => {
                       //BAM add some logging
