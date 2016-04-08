@@ -19,6 +19,7 @@ export class Journal {
         this.http = http;
         this.coffeeData = coffeeData;
         this.newEntry = new CoffeeEntry();
+        this.newEntry.reset();
         this.validation = validation.on(this, (config) => { config.useLocale('de-DE')})
           .ensure('newEntry.location')
                 .isNotEmpty()
@@ -67,19 +68,18 @@ export class Journal {
     }
 
     save(newEntry){
-
         this.validation.validate()
             .then(() => {
                 return this.coffeeData
                     .saveNewEntry(newEntry)
                     .then(result => {
                         this.entries.unshift(result);
-                    })
-                    .then(() => {
                         //reset form
                         this.newEntry.reset();
-                        this.validation.clear()
-                    })
+                        this.validation.clear();
+                        this.validation.result.isValid = false;
+                        return result;
+                    });
             });
     }
 

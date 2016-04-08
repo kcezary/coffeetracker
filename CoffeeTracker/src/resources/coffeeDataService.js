@@ -2,15 +2,14 @@
 import {HttpClient} from 'aurelia-fetch-client';
 import 'fetch';
 import {CoffeeEntry} from './coffeeentry';
-import {Validation} from 'aurelia-validation';
 import * as toastr from "toastr";
 import {I18N} from 'aurelia-i18n';
 
 let baseUrl = `api/coffee`;
 
-@inject(HttpClient, Validation, I18N)
+@inject(HttpClient, I18N)
 export class CoffeeDataService {
-    constructor(http, validation, i18n) {
+    constructor(http, i18n) {
         http.configure(config => {
             config
               .useStandardConfiguration();
