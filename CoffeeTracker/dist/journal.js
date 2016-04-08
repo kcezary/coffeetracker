@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['aurelia-framework', 'aurelia-fetch-client', 'jquery', 'typeahead.js-jspm', 'fetch', 'aurelia-validation', './coffeeentry', './resources/coffeeDataService'], function (_export, _context) {
+System.register(['aurelia-framework', 'aurelia-fetch-client', 'jquery', 'typeahead.js-jspm', 'fetch', 'aurelia-validation', './resources/coffeeentry', './resources/coffeeDataService'], function (_export, _context) {
     var inject, HttpClient, $, Bloodhound, Validation, CoffeeEntry, CoffeeDataService, _dec, _class, Journal;
 
     function _classCallCheck(instance, Constructor) {
@@ -20,8 +20,8 @@ System.register(['aurelia-framework', 'aurelia-fetch-client', 'jquery', 'typeahe
             Bloodhound = _typeaheadJsJspm.Bloodhound;
         }, function (_fetch) {}, function (_aureliaValidation) {
             Validation = _aureliaValidation.Validation;
-        }, function (_coffeeentry) {
-            CoffeeEntry = _coffeeentry.CoffeeEntry;
+        }, function (_resourcesCoffeeentry) {
+            CoffeeEntry = _resourcesCoffeeentry.CoffeeEntry;
         }, function (_resourcesCoffeeDataService) {
             CoffeeDataService = _resourcesCoffeeDataService.CoffeeDataService;
         }],

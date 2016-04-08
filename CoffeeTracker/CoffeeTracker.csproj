@@ -205,7 +205,7 @@
     <Content Include="protractor.conf.js" />
     <Content Include="src\app.html" />
     <Content Include="src\app.js" />
-    <Content Include="src\coffeeentry.js" />
+    <Content Include="src\resources\coffeeentry.js" />
     <Content Include="src\journal.html" />
     <Content Include="src\journal.js" />
     <Content Include="src\main.js" />

@@ -4,7 +4,7 @@ import $ from 'jquery';
 import {Bloodhound} from "typeahead.js-jspm";
 import 'fetch';
 import {Validation} from 'aurelia-validation';
-import {CoffeeEntry} from './coffeeentry';
+import {CoffeeEntry} from './resources/coffeeentry';
 import {CoffeeDataService} from "./resources/coffeeDataService";
 
 @inject(HttpClient, Validation, CoffeeDataService)

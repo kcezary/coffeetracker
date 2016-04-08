@@ -27,7 +27,7 @@ export class App {
         ]);
 
         var logger = jsnlog.JL();
-        logger.info("configureRouter");
+        logger.info("Client configured");
 
         this.router = router;
     }
