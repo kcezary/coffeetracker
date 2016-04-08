@@ -1,6 +1,8 @@
-﻿export class CoffeeEntry {
-    location = "";
-    coffeeType = "";
-    itemPrice = null;
-    quantity = null;
+﻿﻿export class CoffeeEntry {
+    reset() {
+        this.location = "";
+        this.coffeeType = "";
+        this.quantity = null;
+        this.itemPrice = null;
+    }
 }

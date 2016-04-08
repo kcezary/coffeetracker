@@ -12,17 +12,23 @@ System.register([], function (_export, _context) {
     return {
         setters: [],
         execute: function () {
-            _export("CoffeeEntry", CoffeeEntry = function CoffeeEntry() {
-                _classCallCheck(this, CoffeeEntry);
+            _export("CoffeeEntry", CoffeeEntry = function () {
+                function CoffeeEntry() {
+                    _classCallCheck(this, CoffeeEntry);
+                }
 
-                this.location = "";
-                this.coffeeType = "";
-                this.itemPrice = null;
-                this.quantity = null;
-            });
+                CoffeeEntry.prototype.reset = function reset() {
+                    this.location = "";
+                    this.coffeeType = "";
+                    this.quantity = null;
+                    this.itemPrice = null;
+                };
+
+                return CoffeeEntry;
+            }());
 
             _export("CoffeeEntry", CoffeeEntry);
         }
     };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvZmZlZWVudHJ5LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O21DQUFhOzs7cUJBQ1QsV0FBVztxQkFDWCxhQUFhO3FCQUNiLFlBQVk7cUJBQ1osV0FBVyIsImZpbGUiOiJjb2ZmZWVlbnRyeS5qcyIsInNvdXJjZVJvb3QiOiIvc3JjIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvZmZlZWVudHJ5LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O21DQUFjOzs7OztzQ0FDVix5QkFBUTtBQUNKLHlCQUFLLFFBQUwsR0FBZ0IsRUFBaEIsQ0FESTtBQUVKLHlCQUFLLFVBQUwsR0FBa0IsRUFBbEIsQ0FGSTtBQUdKLHlCQUFLLFFBQUwsR0FBZ0IsSUFBaEIsQ0FISTtBQUlKLHlCQUFLLFNBQUwsR0FBaUIsSUFBakIsQ0FKSTs7O3VCQURFIiwiZmlsZSI6ImNvZmZlZWVudHJ5LmpzIiwic291cmNlUm9vdCI6Ii9zcmMifQ==

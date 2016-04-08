@@ -1,27 +1,24 @@
-﻿import {inject} from 'aurelia-framework';
+﻿﻿import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import $ from 'jquery';
 import {Bloodhound} from "typeahead.js-jspm";
 import 'fetch';
-import {CoffeeEntry} from './coffeeentry';
 import {Validation} from 'aurelia-validation';
-import * as toastr from "toastr";
-import {I18N} from 'aurelia-i18n';
+import {CoffeeEntry} from './coffeeentry';
+import {CoffeeDataService} from "./resources/coffeeDataService";
 
-@inject(HttpClient, Validation, I18N)
+@inject(HttpClient, Validation, CoffeeDataService)
 export class Journal {
     
-    entries = [];
-
-    constructor(http, validation, i18n) {
+    constructor(http, validation, coffeeData) {
         http.configure(config => {
             config
               .useStandardConfiguration();
         });
 
         this.http = http;
-        this.i18n = i18n;
-        this.newEntry = new CoffeeEntry(validation);
+        this.coffeeData = coffeeData;
+        this.newEntry = new CoffeeEntry();
         this.validation = validation.on(this, (config) => { config.useLocale('de-DE')})
           .ensure('newEntry.location')
                 .isNotEmpty()
@@ -31,12 +28,10 @@ export class Journal {
                 .hasLengthBetween(1, 56)
             .ensure('newEntry.quantity')
                 .isNotEmpty()
-                //.isNumber()
                 .isGreaterThan(0)
                 .containsOnlyDigits()
             .ensure('newEntry.itemPrice')
                 .isNotEmpty()
-                //.isNumber()
                 .isGreaterThan(0);
     }
 
@@ -75,57 +70,31 @@ export class Journal {
 
         this.validation.validate()
             .then(() => {
-                let data = JSON.stringify(newEntry);
-                var url = "api/coffee";
-                return this.http.fetch(url, {
-                    method: 'post',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: data
-                }).then(result => result.json())
-                  .then(result => {
-                      this.entries.unshift(result);
-                      let msg = this.i18n.tr('coffeeSaved', {coffeeType: result.coffeeType})
-                      toastr.success(msg);
-
-                  })
+                return this.coffeeData
+                    .saveNewEntry(newEntry)
+                    .then(result => {
+                        this.entries.unshift(result);
+                    })
                     .then(() => {
                         //reset form
-                        this.newEntry.location = "";
-                        this.newEntry.coffeeType = "";
-                        this.newEntry.itemPrice = null;
-                        this.newEntry.quantity = null;
-
+                        this.newEntry.reset();
                         this.validation.clear()
                     })
-                    .catch(error => {
-                        let msg = this.i18n.tr('genericError')
-                        toastr.error(msg);
-                  });
             });
     }
 
     deleteEntry(entry, index) {
-        let url = `api/coffee/${entry.id}`;
-        return this.http.fetch(url, {
-            method: 'delete'
-        }).then(() => {
-            //remove from UI
-            this.entries.splice(index, 1);
-
-            let msg = this.i18n.tr('coffeeDeleted', {coffeeType: entry.coffeeType})
-            toastr.info(msg);
-        }).catch(error => {
-            let msg = this.i18n.tr('genericError')
-            toastr.error(msg);
-        });
+        return this.coffeeData
+            .deleteEntry(entry)
+            .then(() => {
+                //remove from UI
+                this.entries.splice(index, 1);
+            })
     }
 
     activate(params) {
-        return this.http.fetch('api/coffee')
-          .then(response => response.json())
-          .then(entries => this.entries = entries);   
+        return this.coffeeData
+            .getAllEntries()
+            .then(entries => this.entries = entries);   
     }
 }
