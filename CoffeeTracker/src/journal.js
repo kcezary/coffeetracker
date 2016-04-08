@@ -6,19 +6,21 @@ import 'fetch';
 import {CoffeeEntry} from './coffeeentry';
 import {Validation} from 'aurelia-validation';
 import * as toastr from "toastr";
+import {I18N} from 'aurelia-i18n';
 
-@inject(HttpClient, Validation)
+@inject(HttpClient, Validation, I18N)
 export class Journal {
     
     entries = [];
 
-    constructor(http, validation) {
+    constructor(http, validation, i18n) {
         http.configure(config => {
             config
               .useStandardConfiguration();
         });
 
         this.http = http;
+        this.i18n = i18n;
         this.newEntry = new CoffeeEntry(validation);
         this.validation = validation.on(this, (config) => { config.useLocale('de-DE')})
           .ensure('newEntry.location')
@@ -85,8 +87,7 @@ export class Journal {
                 }).then(result => result.json())
                   .then(result => {
                       this.entries.unshift(result);
-                      
-                      let msg = `${result.coffeeType} erfolgreich gespeichert!`;
+                      let msg = this.i18n.tr('coffeeSaved', {coffeeType: result.coffeeType})
                       toastr.success(msg);
 
                   })
@@ -100,7 +101,7 @@ export class Journal {
                         this.validation.clear()
                     })
                     .catch(error => {
-                        let msg = `Es gab ein Problem hier...`;
+                        let msg = this.i18n.tr('genericError')
                         toastr.error(msg);
                   });
             });
@@ -114,10 +115,10 @@ export class Journal {
             //remove from UI
             this.entries.splice(index, 1);
 
-            let msg = `${entry.coffeeType} gelöscht!`;
+            let msg = this.i18n.tr('coffeeDeleted', {coffeeType: entry.coffeeType})
             toastr.info(msg);
         }).catch(error => {
-            let msg = `Es gab ein Problem hier...`;
+            let msg = this.i18n.tr('genericError')
             toastr.error(msg);
         });
     }

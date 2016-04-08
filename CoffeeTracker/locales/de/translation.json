@@ -5,5 +5,10 @@
   "price": "Preis",
   "quantity": "Anzahl",
   "save": "Speichern",
-  "sum": "Gesamtpreis"
+  "sum": "Gesamtpreis",
+
+  "coffeeSaved": "{{coffeeType}} erfolgreich gespeichert!",
+  "coffeeDeleted": "{{coffeeType}} gelöscht!",
+
+  "genericError":  "Es gab ein Problem hier..."
 }
